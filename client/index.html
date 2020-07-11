@@ -2,6 +2,7 @@
 <script>
     var userID = -1;
     var socket = io();
+    var gameInfoList = [];
    
     var executeAttack = () => {
         socket.emit('attack', {
@@ -12,6 +13,17 @@
     socket.on('playerID', (data) => {
         userID = data.ID;
     });
+
+    socket.on('gameInfo', (data) => {
+        gameInfoList.push(data);
+        document.getElementById("gameInfo").innerHTML += data + "<br />";
+    })
 </script>
  
-<button onclick="executeAttack()">Attack</button>
+<html>
+    <h1>Game Info</h1>
+    <div id="gameInfo">
+        
+    </div>
+    <button onclick="executeAttack()">Attack</button>
+</html>
